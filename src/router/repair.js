@@ -3,10 +3,11 @@ const router = new Router()
 const Mock = require('mockjs')
 const Random = Mock.Random
 
-// 汽车商品列表
-router.get('/api/cargoods/list', (ctx, next) => {
+// 维修人员评价列表
+router.get('/api/repair/list', (ctx, next) => {
   const page = ctx.query.page * 1 || 1
   const page_size = ctx.query.page_size * 1 || 10
+  const staff_id = ctx.query.staff_id
 
   console.table({
     page,
@@ -25,12 +26,25 @@ router.get('/api/cargoods/list', (ctx, next) => {
   }
 
   const list = []
+
   for (let i = 0; i < length; i++) {
+    const imageArr = [
+      Random.image('185x105', Random.color()),
+      Random.image('185x105', Random.color()),
+      Random.image('185x105', Random.color()),
+    ]
     list.push({
-      cargoods_id: (page - 1) * 10 + i,
-      price: Random.integer(10, 80) + '0000.00',
-      name: Random.cparagraph(1, 3),
-      image: Random.image('210x160', Random.color()),
+      user_id: staff_id,
+      star: Random.integer(0, 5),
+      content: Random.cparagraph(1, 3),
+      createtime: Random.date('yyyy-MM-dd'),
+      images: imageArr.filter(() => Random.boolean()),
+      user: {
+        id: staff_id,
+        nickname: Random.cname(),
+        avatar: Random.image('74x74', Random.color()),
+        mobile: '15588889999',
+      },
     })
   }
 

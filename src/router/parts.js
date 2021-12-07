@@ -3,8 +3,8 @@ const router = new Router()
 const Mock = require('mockjs')
 const Random = Mock.Random
 
-// 汽车商品列表
-router.get('/api/cargoods/list', (ctx, next) => {
+// 配件商品列表
+router.get('/api/parts/glist', (ctx, next) => {
   const page = ctx.query.page * 1 || 1
   const page_size = ctx.query.page_size * 1 || 10
 
@@ -27,8 +27,8 @@ router.get('/api/cargoods/list', (ctx, next) => {
   const list = []
   for (let i = 0; i < length; i++) {
     list.push({
-      cargoods_id: (page - 1) * 10 + i,
-      price: Random.integer(10, 80) + '0000.00',
+      partsgoods_id: (page - 1) * 10 + i,
+      price: Random.integer(10, 2000) + '.00',
       name: Random.cparagraph(1, 3),
       image: Random.image('210x160', Random.color()),
     })
@@ -45,6 +45,7 @@ router.get('/api/cargoods/list', (ctx, next) => {
       end_item_index: page + 10,
       page_size,
       current_page_index: page,
+      partscate_id: 1,
       list,
     },
   })
