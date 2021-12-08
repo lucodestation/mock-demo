@@ -29,7 +29,7 @@ router.get('/api/parts/glist', (ctx, next) => {
     list.push({
       partsgoods_id: (page - 1) * 10 + i,
       price: Random.integer(10, 2000) + '.00',
-      name: Random.cparagraph(1, 3),
+      name: (page - 1) * 10 + i + '. ' + Random.cparagraph(1, 3),
       image: Random.image('210x160', Random.color()),
     })
   }
@@ -42,7 +42,7 @@ router.get('/api/parts/glist', (ctx, next) => {
       total_page_count: 3,
       total_item_count: 28,
       start_item_index: (page - 1) * 10,
-      end_item_index: page + 10,
+      end_item_index: (page - 1) * 10 + 9,
       page_size,
       current_page_index: page,
       partscate_id: 1,

@@ -41,7 +41,7 @@ router.get('/api/repair/list', (ctx, next) => {
       images: imageArr.filter(() => Random.boolean()),
       user: {
         id: staff_id,
-        nickname: Random.cname(),
+        nickname: (page - 1) * 10 + i + '. ' + Random.cname(),
         avatar: Random.image('74x74', Random.color()),
         mobile: '15588889999',
       },
@@ -56,7 +56,7 @@ router.get('/api/repair/list', (ctx, next) => {
       total_page_count: 3,
       total_item_count: 28,
       start_item_index: (page - 1) * 10,
-      end_item_index: page + 10,
+      end_item_index: (page - 1) * 10 + 9,
       page_size,
       current_page_index: page,
       list,

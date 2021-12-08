@@ -5,31 +5,34 @@ const Random = Mock.Random
 
 // 汽车商品列表
 router.get('/api/cargoods/list', (ctx, next) => {
+  // 总数据数
+  const totalItem = 28
+  // 当前页
   const page = ctx.query.page * 1 || 1
-  const page_size = ctx.query.page_size * 1 || 10
+  // 每页条数
+  const pageSize = ctx.query.page_size * 1 || 10
+  // 总页数
+  const totalPage = Math.ceil(totalItem / pageSize)
 
-  console.table({
-    page,
-    page_size,
-  })
+  console.log('总数据数', totalItem)
+  console.log('当前页', page)
+  console.log('每页条数', pageSize)
+  console.log(`总页数 = Math.ceil(${totalItem} / ${pageSize})`, totalPage)
 
-  let length
-  switch (page) {
-    case 1:
-    case 2:
-      length = 10
-      break
-    case 3:
-      length = 8
-      break
+  // 要返回的数据数，默认为每页条数
+  let length = pageSize
+  // 如果是最后一页
+  if (page === totalPage) {
+    length = totalItem % pageSize
   }
+  console.log('本次返回', length, '条数据')
 
   const list = []
   for (let i = 0; i < length; i++) {
     list.push({
       cargoods_id: (page - 1) * 10 + i,
       price: Random.integer(10, 80) + '0000.00',
-      name: Random.cparagraph(1, 3),
+      name: (page - 1) * 10 + i + '. ' + Random.cparagraph(1, 3),
       image: Random.image('210x160', Random.color()),
     })
   }
@@ -39,11 +42,11 @@ router.get('/api/cargoods/list', (ctx, next) => {
     msg: '操作成功',
     time: new Date() * 1,
     data: {
-      total_page_count: 3,
-      total_item_count: 28,
+      total_page_count: totalPage,
+      total_item_count: totalItem,
       start_item_index: (page - 1) * 10,
-      end_item_index: page + 10,
-      page_size,
+      end_item_index: (page - 1) * 10 + 9,
+      page_size: pageSize,
       current_page_index: page,
       list,
     },
