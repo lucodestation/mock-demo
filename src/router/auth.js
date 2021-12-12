@@ -70,7 +70,7 @@ router.get('/api/auth/phoneNumber', async (ctx, next) => {
   ctx.body = data
 })
 
-// 解析个人信息
+// 解析用户信息
 router.get('/api/auth/profile', async (ctx, next) => {
   const appId = 'wxe12a71ce16b99e75'
   const { sessionKey, encryptedData, iv } = ctx.query
