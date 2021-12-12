@@ -6,9 +6,11 @@ demo.prefix('/api/demo')
 const cargoods = require('./cargoods.js')
 const parts = require('./parts.js')
 const repair = require('./repair.js')
+const systemMessage = require('./system-message.js')
+const auth = require('./auth.js')
 
 // 在这里注册你的路由模块
-const routers = [demo.routes(), cargoods, parts, repair]
+const routers = [demo.routes(), cargoods, parts, repair, systemMessage, auth]
 
 const registerRouter = () => compose(routers)
 module.exports = registerRouter
