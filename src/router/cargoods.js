@@ -4,6 +4,7 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 
 // 汽车商品列表
+// http://localhost:3000/api/cargoods/list
 router.get('/api/cargoods/list', (ctx, next) => {
   // 总数据数
   const totalItem = 28
