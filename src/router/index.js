@@ -7,9 +7,10 @@ const cargoods = require('./cargoods.js')
 const parts = require('./parts.js')
 const repair = require('./repair.js')
 const auth = require('./auth.js')
+const mine = require('./mine.js')
 
 // 在这里注册你的路由模块
-const routers = [demo.routes(), cargoods, parts, repair, auth]
+const routers = [demo.routes(), cargoods, parts, repair, auth, mine]
 
 const registerRouter = () => compose(routers)
 module.exports = registerRouter
