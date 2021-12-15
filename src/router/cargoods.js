@@ -29,13 +29,15 @@ router.get('/api/cargoods/list', (ctx, next) => {
   console.log('本次返回', length, '条数据')
 
   const list = []
-  for (let i = 0; i < length; i++) {
-    list.push({
-      cargoods_id: (page - 1) * 10 + i,
-      price: Random.integer(10, 80) + '0000.00',
-      name: (page - 1) * 10 + i + '. ' + Random.cparagraph(1, 3),
-      image: Random.image('210x160', Random.color()),
-    })
+  if (page <= totalPage) {
+    for (let i = 0; i < length; i++) {
+      list.push({
+        cargoods_id: (page - 1) * 10 + i,
+        price: Random.integer(10, 80) + '0000.00',
+        name: (page - 1) * 10 + i + '. ' + Random.cparagraph(1, 3),
+        image: Random.image('210x160', Random.color()),
+      })
+    }
   }
 
   const data = Mock.mock({

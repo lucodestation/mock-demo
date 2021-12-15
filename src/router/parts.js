@@ -30,13 +30,15 @@ router.get('/api/parts/glist', (ctx, next) => {
   console.log('本次返回', length, '条数据')
 
   const list = []
-  for (let i = 0; i < length; i++) {
-    list.push({
-      partsgoods_id: (page - 1) * 10 + i,
-      price: Random.integer(10, 2000) + '.00',
-      name: (page - 1) * 10 + i + '. ' + Random.cparagraph(1, 3),
-      image: Random.image('210x160', Random.color()),
-    })
+  if (page <= totalPage) {
+    for (let i = 0; i < length; i++) {
+      list.push({
+        partsgoods_id: (page - 1) * 10 + i,
+        price: Random.integer(10, 2000) + '.00',
+        name: (page - 1) * 10 + i + '. ' + Random.cparagraph(1, 3),
+        image: Random.image('210x160', Random.color()),
+      })
+    }
   }
 
   const data = Mock.mock({
@@ -115,46 +117,48 @@ router.get('/api/parts/olist', async (ctx, next) => {
   console.log('本次返回', length, '条数据')
 
   const list = []
-  if (statusIndex === -1) {
-    for (let i = 0; i < length; i++) {
-      const obj = {
-        order_id: (page - 1) * 10 + i,
-        order_sn: '202111011430519744324639',
-        goods_name:
-          (page - 1) * 10 +
-          i +
-          ' 配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1',
-        goods_image: Random.image('105x80', Random.color()),
-        spec_name: '规格',
-        spec_value: '规格值2',
-        price: '289.00',
-        number: 1, //数量
-        pay_price: '289.00',
-        status: Random.integer(0, 5), //订单状态:0=已取消,1=待支付,2=待发货,3=待收货,4=待评价,5=已完成
-        status_text: 'statusText',
+  if (page <= totalPage) {
+    if (statusIndex === -1) {
+      for (let i = 0; i < length; i++) {
+        const obj = {
+          order_id: (page - 1) * 10 + i,
+          order_sn: '202111011430519744324639',
+          goods_name:
+            (page - 1) * 10 +
+            i +
+            ' 配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1',
+          goods_image: Random.image('105x80', Random.color()),
+          spec_name: '规格',
+          spec_value: '规格值2',
+          price: '289.00',
+          number: 1, //数量
+          pay_price: '289.00',
+          status: Random.integer(0, 5), //订单状态:0=已取消,1=待支付,2=待发货,3=待收货,4=待评价,5=已完成
+          status_text: 'statusText',
+        }
+        obj.status_text = statusList[obj.status].label
+        list.push(obj)
       }
-      obj.status_text = statusList[obj.status].label
-      list.push(obj)
-    }
-  } else {
-    for (let i = 0; i < length; i++) {
-      const obj = {
-        order_id: (page - 1) * 10 + i,
-        order_sn: '202111011430519744324639',
-        goods_name:
-          (page - 1) * 10 +
-          i +
-          ' 配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1',
-        goods_image: Random.image('105x80', Random.color()),
-        spec_name: '规格',
-        spec_value: '规格值2',
-        price: '289.00',
-        number: 1, //数量
-        pay_price: '289.00',
-        status: statusIndex, //订单状态:0=已取消,1=待支付,2=待发货,3=待收货,4=待评价,5=已完成
-        status_text: statusList[statusIndex].label,
+    } else {
+      for (let i = 0; i < length; i++) {
+        const obj = {
+          order_id: (page - 1) * 10 + i,
+          order_sn: '202111011430519744324639',
+          goods_name:
+            (page - 1) * 10 +
+            i +
+            ' 配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1配件商品1',
+          goods_image: Random.image('105x80', Random.color()),
+          spec_name: '规格',
+          spec_value: '规格值2',
+          price: '289.00',
+          number: 1, //数量
+          pay_price: '289.00',
+          status: statusIndex, //订单状态:0=已取消,1=待支付,2=待发货,3=待收货,4=待评价,5=已完成
+          status_text: statusList[statusIndex].label,
+        }
+        list.push(obj)
       }
-      list.push(obj)
     }
   }
 

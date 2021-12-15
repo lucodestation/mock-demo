@@ -30,25 +30,27 @@ router.get('/api/repair/list', (ctx, next) => {
   console.log('本次返回', length, '条数据')
 
   const list = []
-  for (let i = 0; i < length; i++) {
-    const imageArr = [
-      Random.image('185x105', Random.color()),
-      Random.image('185x105', Random.color()),
-      Random.image('185x105', Random.color()),
-    ]
-    list.push({
-      user_id: staff_id,
-      star: Random.integer(0, 5),
-      content: Random.cparagraph(1, 3),
-      createtime: Random.date('yyyy-MM-dd'),
-      images: imageArr.filter(() => Random.boolean()),
-      user: {
-        id: staff_id,
-        nickname: (page - 1) * 10 + i + '. ' + Random.cname(),
-        avatar: Random.image('74x74', Random.color()),
-        mobile: '15588889999',
-      },
-    })
+  if (page <= totalPage) {
+    for (let i = 0; i < length; i++) {
+      const imageArr = [
+        Random.image('185x105', Random.color()),
+        Random.image('185x105', Random.color()),
+        Random.image('185x105', Random.color()),
+      ]
+      list.push({
+        user_id: staff_id,
+        star: Random.integer(0, 5),
+        content: Random.cparagraph(1, 3),
+        createtime: Random.date('yyyy-MM-dd'),
+        images: imageArr.filter(() => Random.boolean()),
+        user: {
+          id: staff_id,
+          nickname: (page - 1) * 10 + i + '. ' + Random.cname(),
+          avatar: Random.image('74x74', Random.color()),
+          mobile: '15588889999',
+        },
+      })
+    }
   }
 
   const data = Mock.mock({
