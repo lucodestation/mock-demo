@@ -3,6 +3,14 @@ const app = new Koa()
 const koaBody = require('koa-body')
 const error = require('koa-json-error')
 
+const static = require('koa-static')
+const mount = require('koa-mount')
+
+const path = require('path')
+
+// 为静态资源托管提供虚拟路径
+app.use(mount('/public', static(path.join(__dirname, '../public'))))
+
 const router = require('./router/index.js')
 
 app.use(koaBody())

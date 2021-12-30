@@ -74,4 +74,28 @@ router.get('/foo/list', (ctx, next) => {
   ctx.body = data
 })
 
+// http://localhost:3000/api/demo/foo/poster2
+router.get('/foo/poster2', (ctx, next) => {
+  const obj = {
+    code: 1,
+    msg: '操作成功',
+    time: new Date() * 1,
+    data: {
+      goodsinfo: {
+        image: 'http://4s.duowencaiwu.com/uploads/20211229/2e5d7899d065551f989feeae2d36c7e0.jpg',
+        name: '适用于通用汽车雨刮雨刷器喷水管玻璃水连接管橡胶软管三通直通y型t接头 黑色橡胶管2米配接头各2个',
+        partsgoods_id: 13,
+        price: '0.01',
+      },
+      qrcode: 'http://localhost:3000/public/wechat-miniprogram-demo.jpg',
+      userinfo: {
+        avatar: 'http://4s.duowencaiwu.com/uploads/20211214/5796f9c97e25bcfd6bee9e58dec3d581.png',
+        nickname: '卢先生',
+      },
+    },
+  }
+
+  ctx.body = obj
+})
+
 module.exports = router
