@@ -1,5 +1,7 @@
 const Koa = require('koa')
+const cors = require('koa2-cors')
 const app = new Koa()
+app.use(cors())
 const koaBody = require('koa-body')
 const error = require('koa-json-error')
 
