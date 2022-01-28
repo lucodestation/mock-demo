@@ -4,9 +4,9 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 // mock 示例 http://mockjs.com/examples.html
 
-// localhost:3000/api/demo/foo
-http: router.get('/foo', (ctx, next) => {
-  ctx.status = 204
+// http://localhost:3000/api/demo/foo
+router.get('/foo', (ctx, next) => {
+  ctx.status = 200
   ctx.body = {
     date: Random.now(),
     message: 'ok',
