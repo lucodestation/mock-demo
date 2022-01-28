@@ -4,7 +4,9 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 // mock 示例 http://mockjs.com/examples.html
 
-router.get('/foo', (ctx, next) => {
+// localhost:3000/api/demo/foo
+http: router.get('/foo', (ctx, next) => {
+  ctx.status = 204
   ctx.body = {
     date: Random.now(),
     message: 'ok',
@@ -87,7 +89,7 @@ router.get('/foo/poster2', (ctx, next) => {
         partsgoods_id: 13,
         price: '0.01',
       },
-      qrcode: 'http://localhost:3000/public/wechat-miniprogram-demo.jpg',
+      qrcode: 'https://res.wx.qq.com/wxdoc/dist/assets/img/demo.ef5c5bef.jpg',
       userinfo: {
         avatar: 'http://4s.duowencaiwu.com/uploads/20211214/5796f9c97e25bcfd6bee9e58dec3d581.png',
         nickname: '卢先生',
@@ -97,5 +99,11 @@ router.get('/foo/poster2', (ctx, next) => {
 
   ctx.body = obj
 })
+
+// // http://localhost:3000/api/demo/shop/upInfo
+// router.post('/shop/upInfo', (ctx, next) => {
+//   console.log(ctx.request.body)
+//   ctx.body = 'ok'
+// })
 
 module.exports = router

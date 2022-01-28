@@ -10,9 +10,10 @@ const auth = require('./auth.js')
 const mine = require('./mine.js')
 const repairOrder = require('./repairOrder.js')
 const coupon = require('./coupon.js')
+const jimanman = require('./jimanman')
 
 // 在这里注册你的路由模块
-const routers = [demo.routes(), cargoods, parts, repair, auth, mine, repairOrder, coupon]
+const routers = [demo.routes(), cargoods, parts, repair, auth, mine, repairOrder, coupon, jimanman]
 
 const registerRouter = () => compose(routers)
 module.exports = registerRouter
